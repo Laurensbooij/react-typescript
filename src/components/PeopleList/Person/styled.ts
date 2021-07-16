@@ -11,6 +11,12 @@ export const Container = styled.div`
     background-color: #fff;
     transition: all 0.3s ease;
     position: relative;
+    cursor: grab;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
 
     &:before {
         content: "";

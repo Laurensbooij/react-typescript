@@ -32,10 +32,7 @@ const AddPerson: FC<IProps> = ({ setPeople }) => {
         note: "",
     });
 
-    const [incompleteFormNotice, setIncompleteFormNotice] = useState(false)
-
     const inputChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
-
         if (event.target.name === "age") {
             setInput((prevInput) => ({
                 ...prevInput,
