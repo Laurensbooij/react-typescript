@@ -4,25 +4,27 @@ import GlobalStyle from 'styles/global';
 import AddPerson from 'components/AddPerson';
 import PeopleList from 'components/PeopleList';
 
-export interface IState {
+export interface AppState {
   people: {
     firstName: string, 
     lastName: string, 
     age: number,
     nationality: string,
-    note?: string,
+    note: string,
+    id: number,
     }[],
 }
 
 function App() {
 
-  const [people, setPeople] = useState<IState["people"]>([
+  const [people, setPeople] = useState<AppState["people"]>([
     {
       firstName: "Laurens",
       lastName: "Booij",
       age: 23,
       nationality: "Dutch",
-      note: "Is learning typescript in React."
+      note: "Is learning typescript in React.",
+      id: 189296,
     },
   ]);
   
@@ -32,6 +34,7 @@ function App() {
       <AddPerson setPeople={setPeople} />
       <PeopleList
         people={people}
+        setPeople={setPeople}
         orientation="row"
       />
     </>

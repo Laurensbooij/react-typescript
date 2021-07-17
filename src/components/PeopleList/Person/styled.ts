@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+    disappear?: boolean | string,
+}
+
+export const Container = styled.div<ContainerProps>`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -17,6 +21,11 @@ export const Container = styled.div`
     -webkit-user-select: none; /* Safari */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none;
+
+    ${ props => props.disappear && css`
+        opacity: 0;
+        transform: scale(0);
+    `}
 
     &:before {
         content: "";

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, Dispatch, FC, SetStateAction, useState } from 'react';
 
 import {  
     Button,
@@ -13,17 +13,18 @@ import {
 } from './styled';
 
 interface IProps {
-    setPeople: React.Dispatch<React.SetStateAction<{
+    setPeople: Dispatch<SetStateAction<{
         firstName: string, 
         lastName: string, 
         age: number,
         nationality: string,
-        note?: string,
+        note: string,
+        id: number,
     }[]>>,
 };
 
 const AddPerson: FC<IProps> = ({ setPeople }) => {
-    
+
     const [input, setInput] = useState({
         firstName: "",
         lastName: "",
@@ -55,16 +56,22 @@ const AddPerson: FC<IProps> = ({ setPeople }) => {
             !input.nationality
         ) return;
 
-        setPeople(prevPeople => ([
-            ...prevPeople, 
-            {
-                firstName: input.firstName,
-                lastName: input.lastName,
-                age: parseInt(input.age),
-                nationality: input.nationality,
-                note: input.note,
-            },
-        ]));
+        setPeople(prevPeople => {
+            
+            const personId= Math.floor(Math.random() * 10000);
+
+            return ([
+                ...prevPeople, 
+                {
+                    firstName: input.firstName,
+                    lastName: input.lastName,
+                    age: parseInt(input.age),
+                    nationality: input.nationality,
+                    note: input.note,
+                    id: personId,
+                },
+            ]);
+        });
 
         setInput({
             firstName: "",
