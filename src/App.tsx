@@ -26,22 +26,6 @@ function App() {
       note: "Is learning typescript in React.",
       id: 189296,
     },
-    {
-      firstName: "Charlotte",
-      lastName: "Morrissey",
-      age: 24,
-      nationality: "Irish",
-      note: "Is cute.",
-      id: 189296,
-    },
-    {
-      firstName: "Laurens",
-      lastName: "Booij",
-      age: 23,
-      nationality: "Dutch",
-      note: "Is learning typescript in React.",
-      id: 189296,
-    },
   ]);
   
   return (

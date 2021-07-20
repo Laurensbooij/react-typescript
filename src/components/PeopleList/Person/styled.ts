@@ -14,6 +14,7 @@ interface InformationContainerProps {
 export const Container = styled.div`
     position: relative;
     margin: 0 0 20px 0;
+    width: 100%;
 `;
 
 export const DeletePersonIndicator = styled.div<DeletePersonIndicatorProps>`
