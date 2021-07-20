@@ -4,7 +4,7 @@ import Container from './styled';
 
 import Person from './Person';
 
-interface IProps {
+interface PeopleListProps {
     people: {
         firstName: string, 
         lastName: string, 
@@ -24,7 +24,7 @@ interface IProps {
     orientation?: string,
 };
 
-const PeopleList: FC<IProps> = ({ people, setPeople, orientation}) => {
+const PeopleList: FC<PeopleListProps> = ({ people, setPeople, orientation}) => {
 
     const renderListItems = ():JSX.Element[] => (
         people.map((person, i) => (
@@ -40,9 +40,6 @@ const PeopleList: FC<IProps> = ({ people, setPeople, orientation}) => {
             />
         ))
     );
-
-    console.log(people.length);
-
 
     return (
         <Container >

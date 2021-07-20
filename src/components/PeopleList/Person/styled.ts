@@ -1,15 +1,45 @@
 import styled, { css } from 'styled-components';
 
-interface ContainerProps {
-    disappear?: boolean | string,
+import closeSvg from 'media/delete.svg';
+
+interface DeletePersonIndicatorProps {
+    dragCompleted: boolean,
 }
 
-export const Container = styled.div<ContainerProps>`
+interface InformationContainerProps {
+    hideContainer: boolean,
+    isPressed: boolean,
+}
+
+export const Container = styled.div`
+    position: relative;
+    margin: 0 0 20px 0;
+`;
+
+export const DeletePersonIndicator = styled.div<DeletePersonIndicatorProps>`
+    z-index: 0;
+    display: inline-block;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    border: 3px solid;
+    border-color: ${props => props.dragCompleted ? '#F6A600' : '#CACACA'};
+    border-radius: 50px;
+    top: calc(50% - 25px);
+    left: 10px;
+    transition: all 0.3s ease;
+    background: url(${closeSvg});
+    background-size: 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+`;
+
+export const InformationContainer = styled.div<InformationContainerProps>`
+    z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    margin: 0 0 20px 0;
     padding: 25px;
     border-radius: 0 8px 8px 0;
     background-color: #fff;
@@ -17,12 +47,13 @@ export const Container = styled.div<ContainerProps>`
     position: relative;
     cursor: grab;
 
+
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none;
 
-    ${ props => props.disappear && css`
+    ${ props => props.hideContainer && css`
         opacity: 0;
         transform: scale(0);
     `}
@@ -42,7 +73,7 @@ export const Container = styled.div<ContainerProps>`
         box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.1);
 
         &:before {
-            left: -15px;
+            left: ${props => props.isPressed ? '-10px' : '-15px'};
             transition: all 0.3s ease;
         }
     }
@@ -69,7 +100,7 @@ export const LastName = styled.p`
     margin: 0 1rem 0 0.1rem;
 `;
 
-export const InfoContainer = styled.div`
+export const MetaContainer = styled.div`
     display: flex;
     align-items: center;
     margin: 10px 0 15px 0;
