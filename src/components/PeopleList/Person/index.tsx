@@ -8,7 +8,7 @@ interface PersonProps {
     age: number,
     nationality: string,
     note: string,
-    index: number,
+    id: number,
     setPeople: Dispatch<SetStateAction<{
         firstName: string,
         lastName: string,
@@ -19,7 +19,7 @@ interface PersonProps {
     }[]>>,
 };
 
-const Person: FC<PersonProps> = ({ setPeople, firstName, lastName, age, nationality, note, index }) => {
+const Person: FC<PersonProps> = ({ setPeople, firstName, lastName, age, nationality, note, id }) => {
     
     const informationContainerElement: any = useRef(null);
     const deletePersonIndicatorElement: any = useRef(null);
@@ -40,7 +40,7 @@ const Person: FC<PersonProps> = ({ setPeople, firstName, lastName, age, national
     
     const containerMouseUpHandler = (event: any): void => {
         if (informationContainerElement.current === null) return;
-        
+
         informationContainerElement.current.style.transform = `translateX(0)`;
         setIsPressed(false);
 
@@ -51,8 +51,8 @@ const Person: FC<PersonProps> = ({ setPeople, firstName, lastName, age, national
             deletePersonIndicatorElement.current.style.opacity = '0';
 
             setTimeout(() => {
-                setPeople(prevPeople => {
-                    const updatedPeople = prevPeople.filter((item, i) => i !== index);
+                setPeople(prevPeople => {  
+                    const updatedPeople = prevPeople.filter((item) => item.id !== id);
 
                     return [ 
                         ...updatedPeople 

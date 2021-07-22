@@ -30,7 +30,7 @@ const PeopleList: FC<PeopleListProps> = ({ people, setPeople, orientation}) => {
         people.map((person, i) => (
             <Person
                 key={person.id}
-                index={i}
+                id={person.id}
                 setPeople={setPeople}
                 firstName={person.firstName}
                 lastName={person.lastName}
