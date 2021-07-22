@@ -23,7 +23,7 @@ const Person: FC<PersonProps> = ({ setPeople, firstName, lastName, age, national
     
     const informationContainerElement: any = useRef(null);
     const deletePersonIndicatorElement: any = useRef(null);
-    const [hideContainer, setHideContainer] = useState(false);
+    const [hidePerson, setHidePerson] = useState(false);
     const [isPressed, setIsPressed] = useState(false);
     const [dragCompleted, setDragCompleted] = useState(false);
     
@@ -39,29 +39,35 @@ const Person: FC<PersonProps> = ({ setPeople, firstName, lastName, age, national
     };
     
     const containerMouseUpHandler = (event: any): void => {
+        if (informationContainerElement.current === null) return;
+        
         informationContainerElement.current.style.transform = `translateX(0)`;
         setIsPressed(false);
 
         if (dragOffset >= 100) {
-            setHideContainer(true);
+            document.body.removeEventListener("mousemove", containerMouseMoveHandler, true);
+            document.body.removeEventListener("mouseup", containerMouseUpHandler, true);
+            setHidePerson(true);
+            deletePersonIndicatorElement.current.style.opacity = '0';
 
-            setPeople(prevPeople => {
-                const updatedPeople = prevPeople.filter((item, i) => i !== index);
+            setTimeout(() => {
+                setPeople(prevPeople => {
+                    const updatedPeople = prevPeople.filter((item, i) => i !== index);
 
-                return [ 
-                    ...updatedPeople 
-                ];
-            });
+                    return [ 
+                        ...updatedPeople 
+                    ];
+                 });
+            }, 1000);
         }
-
-        document.body.removeEventListener("mousemove", containerMouseMoveHandler, true);
-        document.body.removeEventListener("mouseup", containerMouseUpHandler, true);
     };
 
     const containerMouseMoveHandler = ( event: any ): void => {
+        if (informationContainerElement.current === null) return;
+
         const currentPosition = event.clientX;
         dragOffset = currentPosition - startPosition;
-        
+                
         if (dragOffset <= 100) {
             informationContainerElement.current.style.transform = `translateX(${dragOffset}px)`;
             deletePersonIndicatorElement.current.style.transform = `scale(${(dragOffset / 200) + 0.5})`;
@@ -83,11 +89,13 @@ const Person: FC<PersonProps> = ({ setPeople, firstName, lastName, age, national
     };
 
     return (
-        <Container>
+        <Container
+            hidePerson={hidePerson}
+        >
             <InformationContainer
                 onMouseDown={containerMouseDownHandler}
                 ref={informationContainerElement}
-                hideContainer={hideContainer}
+                hidePerson={hidePerson}
                 isPressed={isPressed}
             >
                 <NameContainer>

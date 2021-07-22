@@ -2,19 +2,28 @@ import styled, { css } from 'styled-components';
 
 import closeSvg from 'media/delete.svg';
 
+interface ContainerProps {
+    hidePerson: boolean,
+}
 interface DeletePersonIndicatorProps {
     dragCompleted: boolean,
 }
-
 interface InformationContainerProps {
-    hideContainer: boolean,
+    hidePerson: boolean,
     isPressed: boolean,
 }
 
-export const Container = styled.div`
+export const Container = styled.div<ContainerProps>`
     position: relative;
     margin: 0 0 20px 0;
-    width: 100%;
+    height: 175px;
+    width: 400px;
+    transition: all 0.7s ease 0.3s;
+
+    ${ props => props.hidePerson && css`
+        height: 0;
+        margin: 0;
+    `}
 `;
 
 export const DeletePersonIndicator = styled.div<DeletePersonIndicatorProps>`
@@ -28,11 +37,11 @@ export const DeletePersonIndicator = styled.div<DeletePersonIndicatorProps>`
     border-radius: 50px;
     top: calc(50% - 25px);
     left: 10px;
-    transition: all 0.3s ease;
     background: url(${closeSvg});
     background-size: 18px;
     background-repeat: no-repeat;
     background-position: center;
+    transition: all 0.3s ease;
 `;
 
 export const InformationContainer = styled.div<InformationContainerProps>`
@@ -40,23 +49,22 @@ export const InformationContainer = styled.div<InformationContainerProps>`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    height: 100%;
     width: 100%;
     padding: 25px;
     border-radius: 0 8px 8px 0;
     background-color: #fff;
-    transition: all 0.3s ease;
     position: relative;
     cursor: grab;
-
+    transition: all 0.3s ease;
 
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none;
 
-    ${ props => props.hideContainer && css`
+    ${ props => props.hidePerson && css`
         opacity: 0;
-        transform: scale(0);
     `}
 
     &:before {
@@ -137,4 +145,5 @@ export const Note = styled.div`
     width: 100%;
     padding: 1rem 0 0 0;
     border-top: solid 2px #EAEAEA;
+    overflow-y: scroll;
 `;

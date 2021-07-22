@@ -18,7 +18,6 @@ const GlobalStyle = createGlobalStyle`
         grid-template-columns: repeat(2, auto);
         column-gap: 50px;
         row-gap: 100px;
-        padding: 100px 0;
 
         @media (max-width: 1200px) {
             grid-template-columns: repeat(1, auto);

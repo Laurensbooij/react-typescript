@@ -104,7 +104,12 @@ const AddPerson: FC<IProps> = ({ setPeople }) => {
                     />
                 </MultipleInputsContainer>
             </FormFieldSet>
-            <FormLabel isRequired>Age</FormLabel>
+            <FormLabel 
+                isRequired
+                htmlFor="age"
+            >
+                Age
+            </FormLabel>
             <Input 
                 type="number"
                 placeholder="Age"
@@ -112,7 +117,12 @@ const AddPerson: FC<IProps> = ({ setPeople }) => {
                 onChange={inputChangeHandler}
                 name="age"
             />
-            <FormLabel isRequired>Nationality</FormLabel>
+            <FormLabel 
+                isRequired
+                htmlFor="nationality"
+            >
+                Nationality
+            </FormLabel>
             <Input 
                 type="text"
                 placeholder="Nationality"
@@ -120,7 +130,7 @@ const AddPerson: FC<IProps> = ({ setPeople }) => {
                 onChange={inputChangeHandler}
                 name="nationality"
             />
-            <FormLabel>Note</FormLabel>
+            <FormLabel htmlFor="note">Note</FormLabel>
             <Textarea 
                 placeholder="Note"
                 value={input.note}
